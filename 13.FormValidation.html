@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="#" method="POST" name="form" onsubmit="return validation()">
+        <h1>Registration Form</h1>
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" name="name" id="name" placeholder="Enter your name">
+            <span id="er_username"></span>
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password" placeholder="Enter your password">
+        </div>
+        <div>
+            <label for="cpassword">Confirm Password:</label>
+            <input type="password" name="cpassword" id="cpassword" placeholder="Confirm your password">
+        </div>
+        <div>
+            <label for="phone">Phone:</label>
+            <input type="text" name="phone" id="phone" placeholder="Enter your phone">
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" placeholder="Enter your email">
+        </div>
+        <div>
+            <label for="dob">Date of Birth:</label>
+            <input type="number" name="year" id="year">
+            <input type="number" name="month" id="month">
+            <input type="number" name="day" id="day">
+        </div>
+        <div>
+            <label for="country">Country:</label>
+            <select name="country" id="country">
+                <option value="usa">USA</option>
+                <option value="canada">Canada</option>
+                <option value="uk">UK</option>
+                <option value="australia">Australia</option>
+                <option value="other">Other</option>
+            </select>
+        </div>
+        <div>
+            <label>Gender:</label>
+            <input type="radio" name="gender" value="male" id="male">
+            <label for="male">Male</label>
+            <input type="radio" name="gender" value="female" id="female">
+            <label for="female">Female</label>
+            <input type="radio" name="gender" value="other" id="other">
+            <label for="other">Other</label>
+        </div>
+        <div>
+            <label>Faculty:</label>
+            <input type="checkbox" name="faculty[]" value="science" id="science">
+            <label for="science">Science</label>
+            <input type="checkbox" name="faculty[]" value="arts" id="arts">
+            <label for="arts">Arts</label>
+            <input type="checkbox" name="faculty[]" value="commerce" id="commerce">
+            <label for="commerce">Commerce</label>
+        </div>
+        <div>
+            <input type="checkbox" name="terms" id="terms">
+            <label for="terms">I accept the terms and conditions</label>
+        </div>
+        <button type="submit" id="btn">Submit</button>
+    </form>
+    <script type="text/javascript" src="js/13.FormValidation.js"></script>
+</body>
+</html>

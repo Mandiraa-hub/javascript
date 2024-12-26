@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1> Ajax example</h1>
+    <button id="btn" onclick="changeContent()"> Get Data</button>
+    <p id="block">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Numquam dolore error ipsam quibusdam nesciunt odit neque. Consequuntur atque fuga exercitationem illo voluptatem architecto, aliquid expedita itaque dolorem ipsam tempora culpa!</p>
+    <script>
+        function changeContent() {
+            let xhttp = new XMLHttpRequest();
+            xhttp.open('GET','https://dummyapi.online/api/movies','true');
+            xhttp.send();
+            xhttp.onreadystatechange = function(){
+                if(this.status==200 && this.readyState == 4){
+                    let data = JSON.parse(this.responseText);
+                    document.getElementById('block').innerHTML =data;
+
+                    // document.getElementById('block').innerHTML = this.responseText
+                }
+            }
+
+            
+        }
+        //show movie data into table
+        //titlew rating image
+        
+    </script>
+</body>
+</html>

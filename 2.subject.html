@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let subject1 = parseInt(prompt("Enter the marks of your 1st subject"));
+        let subject2 = parseInt(prompt("Enter the marks of your 2nd subject"));
+        let subject3 = parseInt(prompt("Enter the marks of your 3rd subject"));
+        let subject4= parseInt(prompt("Enter the marks of your 4th subject"));
+        let subject5 = parseInt(prompt("Enter the marks of your 5th subject"));
+//total
+        let total = subject1+subject2+subject3+subject4+subject5;
+       alert("Total is:"+total);
+//Percentage
+        let Percentage=(total/500)*100;
+        alert("Percentage is:"+Percentage);
+//Division
+        if(Percentage>=90)
+    {
+        alert("First Division");
+    }
+    else if(Percentage>=80)
+    {
+        alert("second Division");
+    }
+    else if(Percentage>=70)
+    {
+        alert("third Division");
+    }
+    else if(Percentage<70&& Percentage>50)
+    {
+        alert("Fail");
+    }
+
+    </script>
+</body>
+</html>

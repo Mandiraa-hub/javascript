@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change Paragraph Color</title>
+    <style>
+        /* Styling the paragraph */
+        p {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        /* Styling the buttons */
+        .Color_button{
+            padding: 10px 15px;
+            margin-right: 10px;
+            font-size: 16px;
+            border: none;
+            height: 40px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <p id="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi adipisci totam suscipit atque ad voluptas nihil exercitationem magni laboriosam expedita? Earum, autem! Laboriosam corporis nemo quis velit voluptates maxime labore!</p>
+
+    <!-- Color buttons -->
+    <button class="Color_button" style="background-color: red;" onclick="changeColor('red')">Red</button>
+    <button class="Color_button" style="background-color: green;" onclick="changeColor('green')">Green</button>
+    <button class="Color_button" style="background-color: black;" onclick="changeColor('black')">Black</button>
+
+    <script>
+        // Function to change the paragraph color
+        function changeColor(color) {
+            document.getElementById('text').style.backgroundColor = color;
+            document.getElementById('text').style.color = 'white';
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!-- Jquery is a javascript library
+5 marks 
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ab sed nemo quod, nobis quaerat voluptate non suscipit modi, reprehenderit, eveniet itaque. Non illum ex nostrum amet expedita voluptatibus similique ratione?</p>
+    <p class="test">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cumque laudantium consequuntur deleniti quidem velit nesciunt suscipit id nemo adipisci quas distinctio obcaecati, vitae amet itaque ipsam earum dicta esse ab.</p>
+    <p class="test" id="last">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius, odit quae. Sequi reiciendis quos accusamus. Saepe quasi error eos voluptas dolor magni! Iusto quis molestias aspernatur. Ab accusamus dolore aperiam!</p>
+    <button id="hide_all">Hide</button>
+    <button id="hide_class">Hide the class</button>
+    <button id="hide_id">Hide the id</button>
+    <button id="show_all">show all</button>
+    <script src="jquery-3.7.1.js"></script>
+    <script>
+        //fadeIn, fadeOut,slideUp,slideDown,animate, toggle
+        // ready() function is used to only load query after all the html has been loaded
+        $(document).ready(function(){
+            $("#hide_all").click(function(){
+                $('p').hide('slow');
+        });
+        $('#hide_class').click(function(){
+            $('p.test').hide('fast');
+        })
+        $('#hide_id').click(function(){
+            $('p#last').hide('100000');
+        })
+        $('#show_all').click(function(){
+            $('p').toggle();
+            })
+        });
+    </script>
+</body>
+</html>
