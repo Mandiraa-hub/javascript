@@ -1,0 +1,26 @@
+<!-- 4. Write a JavaScript function that accepts a string as a parameter and converts the first 
+letter of each word of the string in upper case. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function convertToTitleCase(str) {
+            let words = str.split(' ');
+            let titleCasedWords = words.map(word => {
+                return word[0].toUpperCase() + word.slice(1);
+
+            });
+            return titleCasedWords.join(' ');
+        }
+
+    </script>
+</body>
+</html>
+<!-- Example usage -->
+<!-- console.log(convertToTitleCase("hello world")); // Output: "Hello World" -->

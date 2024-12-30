@@ -1,0 +1,25 @@
+<!-- 5. Write a JavaScript program to get the current date. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function currentDate(){
+            let date = new Date();
+            let day = date.getDate();
+            let month = date.getMonth() + 1;
+            let year = date.getFullYear();
+            console.log(`${day}/${month}/${year}`);
+            console.log(`${day}-${month}-${year}`);
+            console.log(`${month}-${day}-${year}`);
+            console.log(`${month}/${day}/${year}`);
+            console.log(date);
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!-- Write a JavaScript function that reverses a number -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function reverseNumber(num) {
+            const reversedNumber = parseFloat(num.toString().split('').reverse().join('')) * Math.sign(num);
+            return reversedNumber;
+        }
+        console.log(reverseNumber(12345)); // Output: 54321
+        console.log(reverseNumber(-12345)); // Output: -54321
+        console.log(reverseNumber(123.45)); // Output: 54.321
+        console.log(reverseNumber(-123.45)); // Output: -54.321
+    </script>
+</body>
+</html>
