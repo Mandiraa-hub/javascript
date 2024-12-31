@@ -1,0 +1,52 @@
+<!-- 26. Write a function called tenMostFrequentWords which get the ten most frequent word from 
+a string taking user input from user? -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function tenMostFrequentWords(inputString) {
+    if (!inputString) {
+        console.log("Please provide a valid string.");
+        return [];
+    }
+
+    // Split the string into words and normalize them
+    const words = inputString
+        .toLowerCase()
+        .match(/\b\w+\b/g); // Match words using a regular expression
+
+    if (!words) {
+        console.log("No words found in the input.");
+        return [];
+    }
+
+    // Count word frequencies
+    const wordCount = {};
+    words.forEach(word => {
+        wordCount[word] = (wordCount[word] || 0) + 1;
+    });
+
+    // Sort the words by frequency in descending order and return the top 10
+    const sortedWords = Object.entries(wordCount)
+        .sort((a, b) => b[1] - a[1]) // Sort by frequency
+        .slice(0, 10); // Get the top 10
+
+    return sortedWords.map(([word, count]) => ({ word, count }));
+}
+
+// Take user input
+const userInput = prompt("Enter a string:");
+
+// Call the function and display the result
+const result = tenMostFrequentWords(userInput);
+console.log("Ten Most Frequent Words:");
+console.log(result);
+
+    </script>
+</body>
+</html>

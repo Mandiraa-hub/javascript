@@ -1,0 +1,80 @@
+<!-- 27. Write JavaScript program to perform following steps of task for DOM manipulation
+a. Create an index.html file and put four p elements as above: Get the first paragraph 
+by using document.querySelector(tagname) and tag name
+b. Get each of the the paragraph using document.querySelector('#id') and by their id
+c. Get all the p as nodeList using document.querySelectorAll(tagname) and by their 
+tag name
+d. Loop through the nodeList and get the text content of each paragraph
+e. Set a text content to paragraph the fourth paragraph,Fourth Paragraph
+f. Set id and class attribute for all the paragraphs using different attribute setting 
+methods
+g. Change stye of each paragraph using JavaScript(eg. color, background, border, 
+font-size, font-family
+h. Select all paragraphs and loop through each elements and give the first and third 
+paragraph a color of green, and the second and the fourth paragraph a red color
+i. Set text content, id and class to each paragraph -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="para1">This is the first paragraph.</p>
+    <p id="para2">This is the second paragraph.</p>
+    <p id="para3">This is the third paragraph.</p>
+    <p id="para4">This is the fourth paragraph .</p>
+
+<script>
+  // a. Get the first paragraph using document.querySelector(tagname)
+const firstParagraph = document.querySelector("p");
+console.log("First Paragraph:", firstParagraph.textContent);
+
+// b. Get each paragraph by their ID using document.querySelector('#id')
+const para1 = document.querySelector("#para1");
+const para2 = document.querySelector("#para2");
+const para3 = document.querySelector("#para3");
+const para4 = document.querySelector("#para4");
+
+console.log("Paragraph by ID:");
+console.log("para1:", para1.textContent);
+console.log("para2:", para2.textContent);
+console.log("para3:", para3.textContent);
+console.log("para4:", para4.textContent);
+
+// c. Get all paragraphs as a NodeList using document.querySelectorAll(tagname)
+const allParagraphs = document.querySelectorAll("p");
+console.log("All Paragraphs NodeList:", allParagraphs);
+
+// d. Loop through the NodeList and get the text content of each paragraph
+allParagraphs.forEach((para, index) => {
+    console.log(`Paragraph ${index + 1}:`, para.textContent);
+});
+
+// e. Set text content to the fourth paragraph
+para4.textContent = "Fourth Paragraph";
+console.log("Updated Fourth Paragraph:", para4.textContent);
+
+// f. Set id and class attribute for all paragraphs
+allParagraphs.forEach((para, index) => {
+    para.setAttribute("class", `paragraph-${index + 1}`);
+    para.setAttribute("id", `new-para${index + 1}`);
+});
+console.log("Updated IDs and Classes for Paragraphs: ", allParagraphs);
+
+// g. Change style of each paragraph
+allParagraphs.forEach((para, index) => {
+    para.style.color = index % 2 === 0 ? "blue" : "green"; // Alternating colors
+    para.style.backgroundColor = "#f4f4f4"; // Light gray background
+    para.style.border = "1px solid black";
+    para.style.fontSize = "18px";
+    para.style.fontFamily = "Arial, sans-serif";
+    para.style.padding = "5px";
+    para.style.margin = "5px 0";
+});
+console.log("Styles updated for all paragraphs.");
+
+    </script>
+</body>
+</html>
