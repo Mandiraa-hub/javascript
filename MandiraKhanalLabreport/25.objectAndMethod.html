@@ -1,0 +1,60 @@
+<!-- 25. Create an object literal called personAccount. It has firstName, lastName, incomes, 
+expenses properties and it has totalIncome, totalExpense, accountInfo,addIncome, 
+addExpense and accountBalance methods. Incomes is a set of incomes and its description 
+and expenses is a set of incomes and its description. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Create an object literal called personAccount
+let personAccount = {
+    firstName: "John",
+    lastName: "Doe",
+    incomes: [],
+    expenses: []
+};
+// Define methods for the personAccount object
+personAccount.totalIncome = function () {
+    let total = 0;
+    for (let income of this.incomes) {
+        total += income.amount;
+    }
+    return total;
+};
+personAccount.totalExpense = function () {
+    let total = 0;
+    for (let expense of this.expenses) {
+        total += expense.amount;
+    }
+    return total;
+};
+personAccount.accountInfo = function () {
+    return `Total Income: ${this.totalIncome()}, Total Expense: ${this.totalExpense()}`;
+};
+personAccount.addIncome = function (description, amount) {
+    this.incomes.push({ description, amount });
+};
+personAccount.addExpense = function (description, amount) {
+    this.expenses.push({ description, amount });
+};
+personAccount.accountBalance = function () {
+    return this.totalIncome() - this.totalExpense();
+    };
+// Add incomes and expenses to the personAccount object
+personAccount.addIncome("Salary", 3000);
+personAccount.addIncome("Freelancing", 500);
+personAccount.addExpense("Rent", 900);
+personAccount.addExpense("Food", 100);
+// Print the updated personAccount object and call the accountInfo and accountBalance methods
+console.log("Updated personAccount object:", personAccount);
+console.log("Account Info:", personAccount.accountInfo());
+console.log("Account Balance:", personAccount.accountBalance());
+
+    </script>
+</body>
+</html>
