@@ -1,0 +1,24 @@
+<!-- 21. Write a JavaScript function to get the weekend date. -->
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+ </head>
+ <body>
+    <script>
+function getNextWeekendDate() {
+    const today = new Date(); // Get the current date
+    const day = today.getDay(); // Get the current day (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
+    // Calculate the number of days to add to reach the next Saturday
+    const daysUntilSaturday = (day <= 5) ? (6 - day) : 0; 
+    // Add the days until Saturday to the current date
+    const nextSaturday = new Date(today);
+    nextSaturday.setDate(today.getDate() + daysUntilSaturday);
+    // Return the result
+    return nextSaturday;
+}
+    </script>
+ </body>
+ </html>

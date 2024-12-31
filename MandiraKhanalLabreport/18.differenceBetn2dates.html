@@ -1,0 +1,31 @@
+<!-- 18. Write a JavaScript function to get difference between two dates in days -->
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+ </head>
+ <body>
+    <script>
+       function dateDifference(date1, date2) {
+    // Parse the dates to ensure they are Date objects
+    const d1 = new Date(date1);
+    const d2 = new Date(date2);
+
+    // Calculate the difference in time (milliseconds)
+    const timeDifference = Math.abs(d2 - d1);
+
+    // Convert the time difference to days
+    const dayDifference = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
+
+    return dayDifference;
+}
+
+// Example usage:
+console.log(dateDifference("2024-12-25", "2024-12-31")); // Output: 6
+console.log(dateDifference("2023-01-01", "2023-01-10")); // Output: 9
+
+    </script>
+ </body>
+ </html>

@@ -1,0 +1,34 @@
+<!-- 19. Write a JavaScript program to calculate age taking input using form. -->
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+ </head>
+ <body>
+    <form id="myForm">
+        <label for="dob">Enter your date of birth:</label><br><br>
+        <input type="date" id="dob" name="dob"><br>
+        <button type="button" onclick="calculateAge()">Calculate Age</button><br>
+        <label for="age">Your age is:</label><br>
+        <input type="text" id="age" name="age">
+        
+    </form>
+    <script>
+         function calculateAge() {
+    // Get the input value
+    const dob = document.getElementById("dob").value;
+    const today = new Date();
+    const birthDate = new Date(dob);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const month = today.getMonth() - birthDate.getMonth();
+    if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    document.getElementById("age").value = age;
+}
+
+    </script>
+ </body>
+ </html>
