@@ -1,0 +1,52 @@
+<!-- 24. Write a JavaScript program to perform following task.
+a. Create an empty object called dog
+b. Print the the dog object on the console
+c. Add name, legs, color, age and bark properties for the dog object. The bark 
+property is a method which return woof woof
+d. Get name, legs, color, age and bark value from the dog object
+e. Set new properties the dog object: breed, getDogInfo
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // a. Create an empty object called dog
+let dog = {};
+
+// b. Print the dog object on the console
+console.log("Initial dog object:", dog);
+
+// c. Add name, legs, color, age, and bark properties to the dog object
+dog.name = "Buddy";
+dog.legs = 4;
+dog.color = "Brown";
+dog.age = 3;
+dog.bark = function () {
+    return "woof woof";
+};
+
+// d. Get and print name, legs, color, age, and bark value from the dog object
+console.log("Dog's Name:", dog.name);
+console.log("Dog's Legs:", dog.legs);
+console.log("Dog's Color:", dog.color);
+console.log("Dog's Age:", dog.age);
+console.log("Dog's Bark Sound:", dog.bark());
+
+// e. Set new properties for the dog object: breed and getDogInfo
+dog.breed = "Golden Retriever";
+dog.getDogInfo = function () {
+    return `This is ${this.name}, a ${this.color} ${this.breed} aged ${this.age} years with ${this.legs} legs.`;
+};
+
+// Print the updated dog object and call the getDogInfo method
+console.log("Updated dog object:", dog);
+console.log("Dog Info:", dog.getDogInfo());
+
+    </script>
+</body>
+</html>
