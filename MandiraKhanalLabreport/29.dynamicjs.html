@@ -1,0 +1,63 @@
+<!--28. Develop the following application; use the following HTML elements to get started with. 
+You will get the same code on starter folder. Apply all the styles and functionality using 
+JavaScript only.
+a. The year color is changing every 1 second
+b. The date and time background color is changing every on seconds
+c. Completed challenge has background green
+d. Ongoing challenge has background yellow
+e. Coming challenges have background red  -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="wrapper">
+        <h1>Asabeneh Yetayeh challenges in 2020</h1>
+        <h2>30DaysOfJavaScript Challenge</h2>
+        <ul>
+        <li data-status="completed">Python Challenge Done</li>
+        <li data-status="ongoing">JavaScript Challenge Ongoing</li>
+        <li data-status="coming">React Challenge Coming</li>
+        <li data-status="coming">FullStack Challenge Coming</li>
+        <li data-status="coming">DataAnalysis Challenge Coming</li>
+        <li data-status="coming">ReactNative Challenge Coming</li>
+        <li data-status="coming">MachineLearning Challenge Coming</li>
+        </ul>
+    </div>
+    <script>
+        const year = document.querySelector('h1');
+        const date = document.querySelector('h2');
+        const challenges = document.querySelectorAll('li');
+        const colors = ['red', 'green', 'yellow'];
+        let counter = 0;
+        let challengeCounter = 0;
+        let challengeColors = ['green', 'yellow', 'red'];
+        setInterval(() => {
+            year.style.color = colors[counter];
+            counter++;
+            if(counter == colors.length) counter = 0;
+        }, 1000);
+        setInterval(() => {
+            date.style.backgroundColor = colors[counter];
+            counter++;
+            if(counter == colors.length) counter = 0;
+        }, 1000);
+        challenges.forEach((challenge) => {
+    const status = challenge.getAttribute("data-status");
+    if (status === "completed") {
+        challenge.style.backgroundColor = "green";
+        challenge.style.color = "white";
+    } else if (status === "ongoing") {
+        challenge.style.backgroundColor = "yellow";
+        challenge.style.color = "black";
+    } else if (status === "coming") {
+        challenge.style.backgroundColor = "red";
+        challenge.style.color = "white";
+    }
+});
+    </script>
+</body>
+</html>
