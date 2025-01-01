@@ -1,0 +1,65 @@
+<!-- 31. Write JavaScript program that generate numbers from 1 to user input number and 
+marking evens, odds and prime numbers with three different colors -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Different Types of Numbers</title>
+    <style>
+        .number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            margin: 2px;
+            color: white;
+        }
+        .even {
+            background-color: green;
+        }
+        .odd {
+            background-color: yellow;
+            color: black;
+        }
+        .prime {
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+
+    <script>
+        function isPrime(num) {
+            if (num <= 1) return false;
+            if (num <= 3) return true;
+            if (num % 2 === 0 || num % 3 === 0) return false;
+            for (let i = 5; i * i <= num; i += 6) {
+                if (num % i === 0 || num % (i + 2) === 0) return false;
+            }
+            return true;
+        }
+
+        const n = parseInt(prompt("Enter a number: "), 10);
+        const container = document.getElementById('container');
+
+        for (let i = 1; i <= n; i++) {
+            const numberDiv = document.createElement('div');
+            numberDiv.classList.add('number');
+            numberDiv.textContent = i;
+
+            if (isPrime(i)) {
+                numberDiv.classList.add('prime');
+            } else if (i % 2 === 0) {
+                numberDiv.classList.add('even');
+            } else {
+                numberDiv.classList.add('odd');
+            }
+
+            container.appendChild(numberDiv);
+        }
+    </script>
+</body>
+</html>

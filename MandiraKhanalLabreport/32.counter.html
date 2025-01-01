@@ -1,0 +1,51 @@
+<!-- 32. Write JavaScript program to generate following program counter -->
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+ </head>
+ <body>
+    <h1>Counter</h1>
+    <Button onclick="addition()">+</Button>
+    <span id="num">99</span>
+    <button onclick="substraction()">-</button><br>
+    <button onclick="reset()">Reset</button>
+    <script>
+function addition()
+{
+
+    let n=document.getElementById('num').innerText;
+    if(n<100)
+{
+   n++;
+   document.getElementById('num').innerText=n;
+}
+else{
+    alert("Higher limit exceeded");
+}
+}
+
+function substraction()
+{
+   
+    let n=document.getElementById('num').innerText;
+    if(n>0)
+    {
+    n--;
+    document.getElementById('num').innerText=n;
+    }
+    else{
+        alert("lower limit exceeded");
+    }
+
+}
+function reset()
+{
+    document.getElementById('num').innerText = 0;
+}
+
+    </script>
+ </body>
+ </html>
