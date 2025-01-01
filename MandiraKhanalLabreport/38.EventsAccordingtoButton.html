@@ -13,11 +13,93 @@ Change Text Color -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Paragraph Manipulation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        p {
+            padding: 10px;
+            font-size: 12pt;
+        }
+        button {
+            display: inline;        
+            font-size: 1rem;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    
+    <h1>Paragraph Manipulation</h1>
+
+    <button onclick="changeBackground()">Change Background</button>
+    <button onclick="changeParagraphBackground()">Change Paragraph Background</button>
+    <button onclick="hideParagraph()">Hide Paragraph</button>
+    <button onclick="showParagraph()">Show Paragraph</button>
+    <button onclick="increaseFontSize()">Increase Font Size</button>
+    <button onclick="decreaseFontSize()">Decrease Font Size</button>
+    <button onclick="resetFontSize()">Reset Font</button>
+    <button onclick="changeTextColor()">Change Text Color</button>
+
+    <p id="paragraph">This is a sample paragraph. Click the buttons above to manipulate me!</p>
+
     <script>
+        // Reference to the paragraph
+const paragraph = document.getElementById('paragraph');
+
+// Function to change the background color of the entire page
+function changeBackground() {
+    document.body.style.backgroundColor = getRandomColor();
+}
+
+// Function to change the background color of the paragraph
+function changeParagraphBackground() {
+    paragraph.style.backgroundColor = getRandomColor();
+}
+
+// Function to hide the paragraph
+function hideParagraph() {
+    paragraph.style.display = 'none';
+}
+
+// Function to show the paragraph
+function showParagraph() {
+    paragraph.style.display = 'block';
+}
+
+// Function to increase the font size of the paragraph
+function increaseFontSize() {
+    const currentSize = parseInt(window.getComputedStyle(paragraph).fontSize);
+    paragraph.style.fontSize = `${currentSize + 2}px`;
+}
+
+// Function to decrease the font size of the paragraph
+function decreaseFontSize() {
+    const currentSize = parseInt(window.getComputedStyle(paragraph).fontSize);
+    paragraph.style.fontSize = `${Math.max(currentSize - 2, 2)}px`; // Minimum font size of 2px
+}
+
+// Function to reset the font size to 12pt
+function resetFontSize() {
+    paragraph.style.fontSize = '12pt';
+}
+
+// Function to change the text color of the paragraph
+function changeTextColor() {
+    paragraph.style.color = getRandomColor();
+}
+
+// Utility function to generate a random color
+function getRandomColor() {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
 
     </script>
 </body>
