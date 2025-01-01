@@ -9,43 +9,59 @@ c. Prime numbers background is red -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            margin: 2px;
+            color: white;
+        }
+        .even {
+            background-color: green;
+        }
+        .odd {
+            background-color: yellow;
+            color: black;
+        }
+        .prime {
+            background-color: red;
+        }
+    </style>
 </head>
 <body>
-    <h1>Number Styling: 0 to 100</h1>
     <div id="container"></div>
 
     <script>
-        // Function to check if a number is prime
-function isPrime(num) {
-    if (num < 2) return false; // Numbers less than 2 are not prime
-    for (let i = 2; i <= Math.sqrt(num); i++) {
-        if (num % i === 0) return false;
-    }
-    return true;
-}
+        function isPrime(num) {
+            if (num <= 1) return false;
+            if (num <= 3) return true;
+            if (num % 2 === 0 || num % 3 === 0) return false;
+            for (let i = 5; i * i <= num; i += 6) {
+                if (num % i === 0 || num % (i + 2) === 0) return false;
+            }
+            return true;
+        }
 
-// Get the container element
-const container = document.getElementById('container');
+        const container = document.getElementById('container');
 
-// Generate numbers from 0 to 100
-for (let i = 0; i <= 100; i++) {
-    const div = document.createElement('div');
-    div.classList.add('number');
-    div.textContent = i;
+        for (let i = 0; i <= 100; i++) {
+            const numberDiv = document.createElement('div');
+            numberDiv.classList.add('number');
+            numberDiv.textContent = i;
 
-    // Apply styles based on the number
-    if (isPrime(i)) {
-        div.classList.add('prime');
-    } else if (i % 2 === 0) {
-        div.classList.add('even');
-    } else {
-        div.classList.add('odd');
-    }
+            if (isPrime(i)) {
+                numberDiv.classList.add('prime');
+            } else if (i % 2 === 0) {
+                numberDiv.classList.add('even');
+            } else {
+                numberDiv.classList.add('odd');
+            }
 
-    // Append the div to the container
-    container.appendChild(div);
-}
-
+            container.appendChild(numberDiv);
+        }
     </script>
 </body>
 </html>

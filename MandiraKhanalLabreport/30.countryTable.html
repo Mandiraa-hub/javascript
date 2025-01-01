@@ -1,0 +1,90 @@
+<!-- 30. Write JavaScript program that use countries array to display 50 countries into tabular
+format 6 countries in a row -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 20px;
+}
+
+table {
+    margin: auto;
+    border-collapse: collapse;
+    width: 80%;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+td {
+    background-color: #f9f9f9;
+}
+</style>
+<body>
+    <h1>Countries Table</h1>
+    <table id="countries-table">
+        <thead>
+            <tr>
+                <th>Countries</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+        // Sample countries array (use any list of 50 countries)
+const countries = [
+    'Afghanistan', 'Albania', 'Algeria', 'Andorra', 'Angola', 'Antigua and Barbuda', 'Argentina', 
+    'Armenia', 'Australia', 'Austria', 'Azerbaijan', 'Bahamas', 'Bahrain', 'Bangladesh', 'Barbados', 
+    'Belarus', 'Belgium', 'Belize', 'Benin', 'Bhutan', 'Bolivia', 'Bosnia and Herzegovina', 'Botswana', 
+    'Brazil', 'Brunei', 'Bulgaria', 'Burkina Faso', 'Burundi', 'Cabo Verde', 'Cambodia', 'Cameroon', 
+    'Canada', 'Central African Republic', 'Chad', 'Chile', 'China', 'Colombia', 'Comoros', 'Congo', 
+    'Costa Rica', 'Croatia', 'Cuba', 'Cyprus', 'Czech Republic', 'Denmark', 'Djibouti', 'Dominica', 
+    'Dominican Republic', 'Ecuador', 'Egypt', 'El Salvador', 'Equatorial Guinea'
+];
+
+// Function to generate the table rows
+function generateTable(countries) {
+    const tableBody = document.querySelector('#countries-table tbody');
+    const rowLength = 6; // Number of countries per row
+
+    for (let i = 0; i < countries.length; i += rowLength) {
+        const row = document.createElement('tr');
+
+        // Create cells for the current row
+        for (let j = 0; j < rowLength; j++) {
+            const cell = document.createElement('td');
+            if (countries[i + j]) {
+                cell.textContent = countries[i + j];
+            } else {
+                cell.textContent = ''; // Leave empty for rows with less than 6 items
+            }
+            row.appendChild(cell);
+        }
+
+        // Append the row to the table body
+        tableBody.appendChild(row);
+    }
+}
+
+// Generate the table using the countries array
+generateTable(countries);
+
+    </script>
+</body>
+</html>
