@@ -17,17 +17,190 @@ character, one lowercase character and one special character.
 i. Course Selection Validation: We check that a course has been selected from a 
 dropdown list.
  -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-    <script>
-
-    </script>
-</body>
-</html>
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Form Validation</title>
+     <style>
+         body {
+             font-family: Arial, sans-serif;
+             background: #f0f0f0;
+             display: flex;
+             justify-content: center;
+             align-items: center;
+             height: 100vh;
+             margin: 0;
+         }
+         form {
+             background: white;
+             padding: 20px;
+             border-radius: 10px;
+             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+             width: 300px;
+         }
+         .form-group {
+             margin-bottom: 15px;
+         }
+         label {
+             display: block;
+             margin-bottom: 5px;
+         }
+         input, select {
+             width: 100%;
+             padding: 8px;
+             box-sizing: border-box;
+         }
+         .error {
+             color: red;
+             font-size: 12px;
+         }
+     </style>
+ </head>
+ <body>
+     <form id="registrationForm" onsubmit="return validateForm()">
+         <div class="form-group">
+             <label for="name">Name:</label>
+             <input type="text" id="name" name="name">
+             <div class="error" id="nameError"></div>
+         </div>
+         <div class="form-group">
+             <label for="address">Address:</label>
+             <input type="text" id="address" name="address">
+             <div class="error" id="addressError"></div>
+         </div>
+         <div class="form-group">
+             <label for="username">Username:</label>
+             <input type="text" id="username" name="username">
+             <div class="error" id="usernameError"></div>
+         </div>
+         <div class="form-group">
+             <label for="email">Email:</label>
+             <input type="email" id="email" name="email">
+             <div class="error" id="emailError"></div>
+         </div>
+         <div class="form-group">
+             <label for="password">Password:</label>
+             <input type="password" id="password" name="password">
+             <div class="error" id="passwordError"></div>
+         </div>
+         <div class="form-group">
+             <label for="website">Website:</label>
+             <input type="url" id="website" name="website">
+         </div>
+         <div class="form-group">
+             <label for="phone">Phone:</label>
+             <input type="text" id="phone" name="phone">
+             <div class="error" id="phoneError"></div>
+         </div>
+         <div class="form-group">
+             <label>Gender:</label>
+             <input type="radio" id="male" name="gender" value="male"> Male
+             <input type="radio" id="female" name="gender" value="female"> Female
+             <div class="error" id="genderError"></div>
+         </div>
+         <div class="form-group">
+             <label for="course">Course:</label>
+             <select id="course" name="course">
+                 <option value="">Select a course</option>
+                 <option value="science">Science</option>
+                 <option value="arts">Arts</option>
+                 <option value="commerce">Commerce</option>
+             </select>
+             <div class="error" id="courseError"></div>
+         </div>
+         <button type="submit">Submit</button>
+     </form>
+ 
+     <script>
+         function validateForm() {
+             let isValid = true;
+ 
+             // Name validation
+             const name = document.getElementById('name').value;
+             const nameError = document.getElementById('nameError');
+             if (name === '' || /\d/.test(name)) {
+                 nameError.textContent = 'Name cannot be empty or contain numbers';
+                 isValid = false;
+             } else {
+                 nameError.textContent = '';
+             }
+ 
+             // Address validation
+             const address = document.getElementById('address').value;
+             const addressError = document.getElementById('addressError');
+             if (address === '') {
+                 addressError.textContent = 'Address cannot be empty';
+                 isValid = false;
+             } else {
+                 addressError.textContent = '';
+             }
+ 
+             // Username validation
+             const username = document.getElementById('username').value;
+             const usernameError = document.getElementById('usernameError');
+             if (username === '' || /\s/.test(username) || /[^a-zA-Z0-9_]/.test(username)) {
+                 usernameError.textContent = 'Username cannot be empty, contain spaces, or special characters except underscore';
+                 isValid = false;
+             } else {
+                 usernameError.textContent = '';
+             }
+ 
+             // Email validation
+             const email = document.getElementById('email').value;
+             const emailError = document.getElementById('emailError');
+             if (email === '' || !/@/.test(email)) {
+                 emailError.textContent = 'Email cannot be empty and must include "@"';
+                 isValid = false;
+             } else {
+                 emailError.textContent = '';
+             }
+ 
+             // Password validation
+             const password = document.getElementById('password').value;
+             const passwordError = document.getElementById('passwordError');
+             const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}$/;
+             if (password === '' || !passwordPattern.test(password)) {
+                 passwordError.textContent = 'Password must be at least 8 characters long with at least one digit, one upper case character, one lowercase character, and one special character';
+                 isValid = false;
+             } else {
+                 passwordError.textContent = '';
+             }
+ 
+             // Phone validation
+             const phone = document.getElementById('phone').value;
+             const phoneError = document.getElementById('phoneError');
+             const phonePattern = /^(98|97|96)\d{8}$/;
+             if (phone === '' || !phonePattern.test(phone)) {
+                 phoneError.textContent = 'Phone cannot be empty, must contain only numbers, and start with 98, 97, or 96';
+                 isValid = false;
+             } else {
+                 phoneError.textContent = '';
+             }
+ 
+             // Gender validation
+             const gender = document.querySelector('input[name="gender"]:checked');
+             const genderError = document.getElementById('genderError');
+             if (!gender) {
+                 genderError.textContent = 'Gender cannot be empty';
+                 isValid = false;
+             } else {
+                 genderError.textContent = '';
+             }
+ 
+             // Course validation
+             const course = document.getElementById('course').value;
+             const courseError = document.getElementById('courseError');
+             if (course === '') {
+                 courseError.textContent = 'Please select a course';
+                 isValid = false;
+             } else {
+                 courseError.textContent = '';
+             }
+ 
+             return isValid;
+         }
+     </script>
+ </body>
+ </html>
