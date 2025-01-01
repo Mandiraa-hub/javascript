@@ -2,3 +2,95 @@
 a. If user click on add new button new row must be added as a last row
 b. If user click on trash icon, remove related row from DOM
  -->
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Table</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .action {
+            cursor: pointer;
+            color: red;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Dynamic Table with Dropdown</h1>
+   <table id="productTable">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>
+                    <select name="product">
+                        <option value="Laptop">Laptop</option>
+                        <option value="Phone">Phone</option>
+                        <option value="Tablet">Tablet</option>
+                        <option value="Headphones">Headphones</option>
+                    </select>
+                </td>
+                <td><input type="number" value="1000" min="0"></td>
+                <td><span class="action" onclick="removeRow(this)">🗑️</span></td>
+            </tr>
+        </tbody>
+    </table>
+    <button onclick="addRow()">Add New Row</button>
+
+    <script>
+        // Add a new row to the table
+function addRow() {
+    const table = document.getElementById('productTable').querySelector('tbody');
+    const rows = table.getElementsByTagName('tr');
+    const newRow = rows[0].cloneNode(true); // Clone the first row
+    const rowIndex = rows.length + 1;
+
+    // Update the new row content
+    newRow.cells[0].textContent = rowIndex; // Update row number
+    newRow.cells[1].querySelector('select').selectedIndex = 0; // Reset the dropdown to the first option
+    newRow.cells[2].querySelector('input').value = ''; // Reset the price field
+    newRow.cells[3].innerHTML = '<span class="action" onclick="removeRow(this)">🗑️</span>'; // Set trash icon action
+
+    table.appendChild(newRow); // Append the new row
+}
+
+// Remove a specific row from the table
+function removeRow(element) {
+    const row = element.closest('tr'); // Get the row containing the clicked element
+    const table = document.getElementById('productTable').querySelector('tbody');
+    table.removeChild(row); // Remove the row
+
+    // Update row numbers
+    Array.from(table.rows).forEach((row, index) => {
+        row.cells[0].textContent = index + 1; // Update the row number
+    });
+}
+
+    </script>
+</body>
+</html>

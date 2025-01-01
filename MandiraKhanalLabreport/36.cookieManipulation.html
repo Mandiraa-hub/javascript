@@ -9,39 +9,148 @@ e. delete all the cookies  -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Cookie Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input, button {
+            margin: 5px 0;
+            padding: 8px;
+            font-size: 1rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background: #f4f4f4;
+        }
+    </style>
 </head>
 <body>
-    <h1>Cookie Example</h1>
-    <button onclick="storeCookie()">Store Cookie</button>
+    <h1>Cookie Management</h1>
+
+    <h2>a. Add Cookie</h2>
+    <label for="key">Key:</label>
+    <input type="text" id="key" placeholder="Enter Key">
+    <br>
+    <label for="value">Value:</label>
+    <input type="text" id="value" placeholder="Enter Value">
+    <br>
+    <button onclick="addCookie()">Add Cookie</button>
+
+    <h2>b. Read Cookie</h2>
+    <label for="readKey">Key:</label>
+    <input type="text" id="readKey" placeholder="Enter Key">
+    <br>
     <button onclick="readCookie()">Read Cookie</button>
-    <button onclick="deleteCookie()">delete Cookie</button>
-    <script>
-        function storeCookie(){
-    let key = prompt("Enter key to store cookie");
-    let value = prompt("Enter value to store into cookie");
-    let cookie = key + '='+ encodeURIComponent(value);
-    cookie += ';max-age=' + 5*24*60*60;
-    document.cookie = cookie; 
-}
-function readCookie(){
-   //Table to display all cookies according to user key
-    let key = prompt("Enter key to read cookie");
-    let cookies = document.cookie.split(';');
-    let table = "<table border='1'><tr><th>Key</th><th>Value</th></tr>";
-    for(let i=0; i<cookies.length; i++){
-        let cookie = cookies[i].split('=');
-            table += "<tr><td>"+document.cookie[key]+"</td><td>"+cookie[value]+"</td></tr>";
+    <p id="readResult"></p>
+
+    <h2>c. Display All Cookies</h2>
+    <button onclick="displayAllCookies()">Display All Cookies</button>
+    <div id="cookieTable"></div>
+
+    <h2>d. Delete Cookie by Key</h2>
+    <label for="deleteKey">Key:</label>
+    <input type="text" id="deleteKey" placeholder="Enter Key">
+    <br>
+    <button onclick="deleteCookie()">Delete Cookie</button>
+
+    <h2>e. Delete All Cookies</h2>
+    <button onclick="deleteAllCookies()">Delete All Cookies</button>
+<script>
+    // Add a cookie
+function addCookie() {
+    const key = document.getElementById('key').value;
+    const value = document.getElementById('value').value;
+
+    if (key && value) {
+        document.cookie = `${key}=${value}; path=/;`;
+        alert(`Cookie with key "${key}" added!`);
+    } else {
+        alert('Please provide both key and value!');
     }
-    table += "</table>";
-    document.write(table);
+}
+// Read a specific cookie by key
+function readCookie() {
+    const key = document.getElementById('readKey').value;
+    const cookies = document.cookie.split('; ');
+    const foundCookie = cookies.find(cookie => cookie.startsWith(`${key}=`));
+    if (foundCookie) {
+        const value = foundCookie.split('=')[1];
+        document.getElementById('readResult').textContent = `Value for key "${key}": ${value}`;
+    } else {
+        document.getElementById('readResult').textContent = `Cookie with key "${key}" not found.`;
+    }
 }
 
-function deleteCookie(){
-    let key = prompt("Enter key to delete cookie");
-document.cookie = key + '=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
-alert("Cookie has been deleted");
+// Display all cookies in a table
+function displayAllCookies() {
+    const cookies = document.cookie.split('; ').filter(cookie => cookie);
+    const tableDiv = document.getElementById('cookieTable');
+
+    if (cookies.length === 0) {
+        tableDiv.innerHTML = '<p>No cookies available.</p>';
+        return;
+    }
+
+    let tableHTML = `<table>
+        <thead>
+            <tr>
+                <th>Key</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>`;
+    cookies.forEach(cookie => {
+        const [key, value] = cookie.split('=');
+        tableHTML += `
+            <tr>
+                <td>${key}</td>
+                <td>${value}</td>
+            </tr>`;
+    });
+
+    tableHTML += '</tbody></table>';
+    tableDiv.innerHTML = tableHTML;
 }
-    </script>
+// Delete a specific cookie by key
+function deleteCookie() {
+    const key = document.getElementById('deleteKey').value;
+
+    if (key) {
+        document.cookie = `${key}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+        alert(`Cookie with key "${key}" deleted!`);
+    } else {
+        alert('Please enter a key to delete!');
+    }
+}
+
+// Delete all cookies
+function deleteAllCookies() {
+    const cookies = document.cookie.split('; ').filter(cookie => cookie);
+
+    if (cookies.length === 0) {
+        alert('No cookies to delete!');
+        return;
+    }
+
+    cookies.forEach(cookie => {
+        const key = cookie.split('=')[0];
+        document.cookie = `${key}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+    });
+
+    alert('All cookies deleted!');
+}
+
+</script>
 </body>
 </html>
