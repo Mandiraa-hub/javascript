@@ -1,0 +1,51 @@
+<!-- 29. Create a div container on HTML document and create 0 to 100 numbers dynamically and 
+append to the container div.
+a. Even numbers background is green
+b. Odd numbers background is yellow
+c. Prime numbers background is red -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Number Styling: 0 to 100</h1>
+    <div id="container"></div>
+
+    <script>
+        // Function to check if a number is prime
+function isPrime(num) {
+    if (num < 2) return false; // Numbers less than 2 are not prime
+    for (let i = 2; i <= Math.sqrt(num); i++) {
+        if (num % i === 0) return false;
+    }
+    return true;
+}
+
+// Get the container element
+const container = document.getElementById('container');
+
+// Generate numbers from 0 to 100
+for (let i = 0; i <= 100; i++) {
+    const div = document.createElement('div');
+    div.classList.add('number');
+    div.textContent = i;
+
+    // Apply styles based on the number
+    if (isPrime(i)) {
+        div.classList.add('prime');
+    } else if (i % 2 === 0) {
+        div.classList.add('even');
+    } else {
+        div.classList.add('odd');
+    }
+
+    // Append the div to the container
+    container.appendChild(div);
+}
+
+    </script>
+</body>
+</html>
