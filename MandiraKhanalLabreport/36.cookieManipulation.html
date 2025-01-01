@@ -1,0 +1,47 @@
+<!-- 36. Write a JavaScript Program to perform following task.
+a. to accept Key and Values from user and store into cookie
+b. to read cookie according to key entered from user
+c. to display all cookies into tabular format with key : values
+d. to delete cookie according to key entered form user
+e. delete all the cookies  -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Cookie Example</h1>
+    <button onclick="storeCookie()">Store Cookie</button>
+    <button onclick="readCookie()">Read Cookie</button>
+    <button onclick="deleteCookie()">delete Cookie</button>
+    <script>
+        function storeCookie(){
+    let key = prompt("Enter key to store cookie");
+    let value = prompt("Enter value to store into cookie");
+    let cookie = key + '='+ encodeURIComponent(value);
+    cookie += ';max-age=' + 5*24*60*60;
+    document.cookie = cookie; 
+}
+function readCookie(){
+   //Table to display all cookies according to user key
+    let key = prompt("Enter key to read cookie");
+    let cookies = document.cookie.split(';');
+    let table = "<table border='1'><tr><th>Key</th><th>Value</th></tr>";
+    for(let i=0; i<cookies.length; i++){
+        let cookie = cookies[i].split('=');
+            table += "<tr><td>"+document.cookie[key]+"</td><td>"+cookie[value]+"</td></tr>";
+    }
+    table += "</table>";
+    document.write(table);
+}
+
+function deleteCookie(){
+    let key = prompt("Enter key to delete cookie");
+document.cookie = key + '=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
+alert("Cookie has been deleted");
+}
+    </script>
+</body>
+</html>
