@@ -1,31 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        #block{
+            background-color: azure;
+            color: black;
+            border:2px solid green;
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Animate JS</h1>
-    <form action="">
-        <label for="username">Username</label>
-        <input type="text" name ="username" id="username">
-        <br/>
-        <label for="password">Password</label>
-        <input type="text" name ="password" id="password">
-        <br/>
-        <button type="submit">Login</button>
+    <h1>Form Example</h1>
+    <form action="" id="reform">
+        <label for="">Username</label>
+        <input type="text" name="username" id="username" />
+        <br>
+        <label for="">Password</label>
+        <input type="password" id="password" name="password"/>
+        <button type="submit">Register</button>
     </form>
-
+    <script src="jquery-3.7.1.js"></script>
     <script>
         $(document).ready(function(){
-            $('username').blur(function(){
-                let username=$(this).val();
-                if(username.length<0){
-                    alert('Username must be 8 character');
+            $('#username').blur(function(){
+                let username = $(this).val();
+                if (username.length < 8) {
+                    alert('Username must be 8 characters');
                 }
-            })
-        })
+            });
+        });
     </script>
 </body>
 </html>

@@ -1,0 +1,195 @@
+<!-- 9. Create web page that has registration form, validate according to following rules using 
+jQuery.
+a. Form field: Name, Address, Username, Email, Password, Website, Phone, 
+Gender(Radio), Course(Dropdown),
+b. Name Validation: We check to make sure the name field is not empty and does 
+not contain any numbers.
+c. Username Validation: We check to make sure the username field is not empty and 
+does not contain any spaces and special character except underscore (_).
+d. Phone Validation: We check to make sure the phone field is not empty, does not
+contain any character except numbers, and should start with [98/97/96].
+e. Gender Validation: We check the gender field is not empty.
+f. Address Validation: We check that the address field is not empty.
+g. Email Validation: We make sure that the email field is not empty and that it 
+includes the “@” symbol.
+h. Password Validation: We ensure that the password field is not empty and that the 
+password is at least eight characters long with at least one digit, one upper case 
+character, one lowercase character and one special character.
+i. Course Selection Validation: We check that a course has been selected from a 
+dropdown list. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form Validation</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .error {
+            color: red;
+            font-size: 0.9em;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:disabled {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">Registration Form</h1>
+    <form id="registrationForm">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name">
+            <span class="error" id="nameError"></span>
+        </div>
+        <div class="form-group">
+            <label for="address">Address</label>
+            <input type="text" id="address" name="address">
+            <span class="error" id="addressError"></span>
+        </div>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username">
+            <span class="error" id="usernameError"></span>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email">
+            <span class="error" id="emailError"></span>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password">
+            <span class="error" id="passwordError"></span>
+        </div>
+        <div class="form-group">
+            <label for="website">Website</label>
+            <input type="url" id="website" name="website">
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="text" id="phone" name="phone">
+            <span class="error" id="phoneError"></span>
+        </div>
+        <div class="form-group">
+            <label>Gender</label>
+            <input type="radio" name="gender" value="Male"> Male
+            <input type="radio" name="gender" value="Female"> Female
+            <span class="error" id="genderError"></span>
+        </div>
+        <div class="form-group">
+            <label for="course">Course</label>
+            <select id="course" name="course">
+                <option value="">Select a course</option>
+                <option value="BCA">BCA</option>
+                <option value="BBA">BBA</option>
+                <option value="BSc">BSc</option>
+            </select>
+            <span class="error" id="courseError"></span>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        $(document).ready(function() {
+            $("#registrationForm").on("submit", function(e) {
+                e.preventDefault(); // Prevent form submission
+
+                let isValid = true;
+
+                // Name Validation
+                const name = $("#name").val().trim();
+                if (name === "" || /\d/.test(name)) {
+                    $("#nameError").text("Name must not be empty or contain numbers.");
+                    isValid = false;
+                } else {
+                    $("#nameError").text("");
+                }
+
+                // Address Validation
+                const address = $("#address").val().trim();
+                if (address === "") {
+                    $("#addressError").text("Address must not be empty.");
+                    isValid = false;
+                } else {
+                    $("#addressError").text("");
+                }
+
+                // Username Validation
+                const username = $("#username").val().trim();
+                if (username === "" || /[^a-zA-Z0-9_]/.test(username)) {
+                    $("#usernameError").text("Username must not be empty or contain spaces/special characters except underscore.");
+                    isValid = false;
+                } else {
+                    $("#usernameError").text("");
+                }
+
+                // Email Validation
+                const email = $("#email").val().trim();
+                if (email === "" || !email.includes("@")) {
+                    $("#emailError").text("Enter a valid email.");
+                    isValid = false;
+                } else {
+                    $("#emailError").text("");
+                }
+
+                // Password Validation
+                const password = $("#password").val();
+                if (!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}$/.test(password)) {
+                    $("#passwordError").text("Password must be at least 8 characters long, contain an uppercase letter, a lowercase letter, a digit, and a special character.");
+                    isValid = false;
+                } else {
+                    $("#passwordError").text("");
+                }
+
+                // Phone Validation
+                const phone = $("#phone").val().trim();
+                if (!/^9[876]\d{8}$/.test(phone)) {
+                    $("#phoneError").text("Phone number must start with 98, 97, or 96 and be 10 digits long.");
+                    isValid = false;
+                } else {
+                    $("#phoneError").text("");
+                }
+
+                // Gender Validation
+                if (!$("input[name='gender']:checked").val()) {
+                    $("#genderError").text("Please select a gender.");
+                    isValid = false;
+                } else {
+                    $("#genderError").text("");
+                }
+
+                // Course Validation
+                if ($("#course").val() === "") {
+                    $("#courseError").text("Please select a course.");
+                    isValid = false;
+                } else {
+                    $("#courseError").text("");
+                }
+
+                if (isValid) {
+                    alert("Form submitted successfully!");
+                }
+            });
+        });
+    </script>
+</body>
+</html>

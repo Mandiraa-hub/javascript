@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies Table</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        img {
+            width: 60px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Movies List</h1>
+    <button onclick="loadMovies()">Load Movies</button>
+    <div id="moviesTable"></div>
+
+    <script>
+        function loadMovies() {
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "https://freetestapi.com/api/v1/movies", true);
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    const movies = JSON.parse(xhr.responseText);
+                    displayMovies(movies);
+                } else {
+                    document.getElementById("moviesTable").innerHTML = "Error fetching movies.";
+                }
+            };
+            xhr.onerror = function () {
+                document.getElementById("moviesTable").innerHTML = "Failed to connect to the API.";
+            };
+            xhr.send();
+        }
+
+        function displayMovies(movies) {
+            let table = `<table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Poster</th>
+                        <th>Year</th>
+                        <th>Genre</th>
+                        <th>Rating</th>
+                        <th>Director</th>
+                        <th>Country</th>
+                        <th>Language</th>
+                        <th>Actors</th>
+                    </tr>
+                </thead>
+                <tbody>`;
+            
+            movies.forEach(movie => {
+                table += `
+                    <tr>
+                        <td>${movie.id}</td>
+                        <td>${movie.title}</td>
+                        <td><img src="${movie.poster}" alt="${movie.title} Poster"></td>
+                        <td>${movie.year}</td>
+                        <td>${movie.genre}</td>
+                        <td>${movie.rating}</td>
+                        <td>${movie.director}</td>
+                        <td>${movie.country}</td>
+                        <td>${movie.language}</td>
+                        <td>${movie.actors.join(", ")}</td>
+                    </tr>`;
+            });
+
+            table += `</tbody></table>`;
+            document.getElementById("moviesTable").innerHTML = table;
+        }
+    </script>
+</body>
+</html>

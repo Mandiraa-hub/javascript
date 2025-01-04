@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX Login Form</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        #message {
+            margin-top: 15px;
+            font-size: 1em;
+        }
+        .error {
+            color: red;
+        }
+        .success {
+            color: green;
+        }
+        input {
+            display: block;
+            margin: 10px 0;
+            padding: 8px;
+            width: 100%;
+            max-width: 300px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:disabled {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">Login Form</h1>
+    <form id="loginForm">
+        <input type="text" id="userid" name="userid" placeholder="Enter User ID" required>
+        <input type="password" id="password" name="password" placeholder="Enter Password" required>
+        <button type="submit">Login</button>
+    </form>
+    <div id="message"></div>
+
+    <script>
+        $(document).ready(function () {
+            $("#loginForm").on("submit", function (e) {
+                e.preventDefault(); // Prevent page reload
+
+                const userid = $("#userid").val().trim();
+                const password = $("#password").val().trim();
+
+                if (userid === "" || password === "") {
+                    $("#message").text("All fields are required.").addClass("error").removeClass("success");
+                    return;
+                }
+
+                $.ajax({
+                    url: "10.login.php", // Backend PHP file
+                    method: "POST",
+                    data: {
+                        userid: userid,
+                        password: password,
+                    },
+                    success: function (response) {
+                        if (response === "success") {
+                            $("#loginForm").hide();
+                            $("#message").text("Welcome! Login successful.").addClass("success").removeClass("error");
+                        } else {
+                            $("#message").text("Invalid User ID or Password. Please try again.").addClass("error").removeClass("success");
+                        }
+                    },
+                    error: function () {
+                        $("#message").text("An error occurred. Please try again later.").addClass("error").removeClass("success");
+                    },
+                });
+            });
+        });
+    </script>
+</body>
+</html>
