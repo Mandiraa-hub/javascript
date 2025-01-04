@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Reset</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .status {
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        .status.available {
+            color: green;
+        }
+        .status.unavailable {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h2>Password Reset</h2>
+    <form>
+        <label for="username">Enter your username:</label><br>
+        <input type="text" id="username" name="username" placeholder="Username" required>
+        <div class="status" id="statusMessage"></div>
+    </form>
+
+    <script>
+        const usernameInput = document.getElementById("username");
+        const statusMessage = document.getElementById("statusMessage");
+
+        usernameInput.addEventListener("input", function () {
+            const username = usernameInput.value.trim();
+
+            if (username.length === 0) {
+                statusMessage.textContent = "";
+                statusMessage.className = "status";
+                return;
+            }
+
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "13.checkUsername.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        const response = xhr.responseText.trim();
+                        if (response === "available") {
+                            statusMessage.textContent = "Username available.";
+                            statusMessage.className = "status available";
+                        } else if (response === "unavailable") {
+                            statusMessage.textContent = "Username not available.";
+                            statusMessage.className = "status unavailable";
+                        } else {
+                            statusMessage.textContent = "Error checking username.";
+                            statusMessage.className = "status unavailable";
+                        }
+                    } else {
+                        statusMessage.textContent = "Failed to connect to the server.";
+                        statusMessage.className = "status unavailable";
+                    }
+                }
+            };
+
+            xhr.send("username=" + encodeURIComponent(username));
+        });
+    </script>
+</body>
+</html>

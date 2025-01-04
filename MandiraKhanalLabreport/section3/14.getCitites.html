@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Country and City Dropdown</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Select Country and City</h2>
+
+    <form>
+        <label for="country">Country:</label>
+        <select id="country">
+            <option value="">Select a country</option>
+            <option value="USA">USA</option>
+            <option value="India">India</option>
+            <option value="Canada">Canada</option>
+        </select>
+
+        <label for="city">City:</label>
+        <select id="city" disabled>
+            <option value="">Select a city</option>
+        </select>
+    </form>
+
+    <script>
+        const countryDropdown = document.getElementById("country");
+        const cityDropdown = document.getElementById("city");
+
+        countryDropdown.addEventListener("change", function () {
+            const selectedCountry = this.value;
+
+            if (selectedCountry === "") {
+                cityDropdown.innerHTML = '<option value="">Select a city</option>';
+                cityDropdown.disabled = true;
+                return;
+            }
+
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "14.getCities.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        const response = JSON.parse(xhr.responseText);
+
+                        if (Array.isArray(response)) {
+                            cityDropdown.innerHTML = '<option value="">Select a city</option>';
+                            response.forEach(city => {
+                                const option = document.createElement("option");
+                                option.value = city;
+                                option.textContent = city;
+                                cityDropdown.appendChild(option);
+                            });
+                            cityDropdown.disabled = false;
+                        } else {
+                            cityDropdown.innerHTML = '<option value="">No cities available</option>';
+                            cityDropdown.disabled = true;
+                        }
+                    } else {
+                        alert("Failed to fetch cities. Please try again.");
+                    }
+                }
+            };
+
+            xhr.send("country=" + encodeURIComponent(selectedCountry));
+        });
+    </script>
+</body>
+</html>

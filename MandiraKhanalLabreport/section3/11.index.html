@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX File Content Display</title>
+    <script>
+        function loadContent() {
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "11.bca.txt", true);
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    document.getElementById("content").innerText = xhr.responseText;
+                } else {
+                    document.getElementById("content").innerText = "Error loading content.";
+                }
+            };
+            xhr.onerror = function () {
+                document.getElementById("content").innerText = "Failed to fetch the file.";
+            };
+            xhr.send();
+        }
+    </script>
+</head>
+<body>
+    <h1>BCA Information</h1>
+    <button onclick="loadContent()">Load Content</button>
+    <div id="content" style="margin-top: 20px; font-size: 1.2em;"></div>
+</body>
+</html>
