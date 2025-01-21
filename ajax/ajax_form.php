@@ -9,7 +9,7 @@ try{
             array_push($semesters,$semester);
         }
     }
-   }catch(Exection $ex){
+   }catch(Exception $ex){
     die('Error:' . $ex->getMessage());
 }
 
