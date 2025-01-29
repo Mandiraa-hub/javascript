@@ -3,6 +3,9 @@
 $validUserId = "user123";
 $validPassword = "password123";
 
+// Set the content type to plain text
+header('Content-Type: text/plain');
+
 // Check if data was sent via POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get the submitted data

@@ -65,7 +65,9 @@
                         password: password,
                     },
                     success: function (response) {
+                        console.log("Response from server:", response);
                         if (response === "success") {
+                            
                             $("#loginForm").hide();
                             $("#message").text("Welcome! Login successful.").addClass("success").removeClass("error");
                         } else {
